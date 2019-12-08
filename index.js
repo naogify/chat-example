@@ -9,7 +9,6 @@ app.get("/", function(req, res) {
 const nsp = io.of("/my-namespace");
 
 nsp.on("connection", function(socket) {
-  console.log(socket);
   socket.on("chat message", function(msg) {
     nsp.emit("chat message", msg);
   });
