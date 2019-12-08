@@ -6,9 +6,12 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", function(socket) {
+const nsp = io.of("/my-namespace");
+
+nsp.on("connection", function(socket) {
+  console.log(socket);
   socket.on("chat message", function(msg) {
-    io.emit("chat message", msg);
+    nsp.emit("chat message", msg);
   });
 });
 
